@@ -1,0 +1,7 @@
+%predicate to eliminate the first 3 occurences of a el. from a list
+
+delete3([],_,_,[]).
+delete3([H|T],X,C,R):-C<3,H=X,
+    C1 is C+1,
+    delete3(T,X,C1,R).
+delete3([H|T],X,C,[H|R]):-delete3(T,X,C,R).

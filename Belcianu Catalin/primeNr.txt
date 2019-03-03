@@ -1,0 +1,11 @@
+primeNumber(A) :-
+    A > 1,                 % Negative numbers, 0 and 1 are not prime.
+    prime_prime(A, 2).     % Begin iteration:
+
+prime_prime(A, B) :-       % Test if A divides by B without remainder
+    B >= A                 % The limit was reached?
+    ->  true               %     Then it's prime.
+    ;   0 is A mod B       % B divides A without a remainder?
+    ->  false              %     Then it's not prime.
+    ;   succ(B, C),        % Otherwise: C is B + 1
+        prime_prime(A, C). % Test if C divides A.

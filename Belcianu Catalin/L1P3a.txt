@@ -1,0 +1,21 @@
+%predicate that removes all the repeating numbers in a list
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+deleteall([],_,[]).
+deleteall([H|T],X,R):-H=X, 
+    deleteall(T,X,R).
+deleteall([H|T],X,[H|R]):-deleteall(T,X,R).
+
+res([],[]).
+res([H|T],R):-nro([H|T],H,R1),R1>1,
+    deleteall([H|T],H,R2),
+    res(R2,R).
+res([H|T],R):-
+    res(T,R1),
+    R=[H|R1].

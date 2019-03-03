@@ -1,0 +1,19 @@
+%predicate to calculate the alt. sum of the elems. of a list
+
+sum([],_,0).
+sum([H|T],X,R):-X=:=0,
+    sum(T,1,R1),
+    R1>=0,
+    R is -H+R1.
+sum([H|T],X,R):-X=:=0,
+    sum(T,1,R1),
+    R1<0,
+    R is -H-R1.
+sum([H|T],X,R):-X=:=1,
+    sum(T,0,R1),
+    R1>=0,
+    R is H-R1.
+sum([H|T],X,R):-X=:=1,
+    sum(T,0,R1),
+    R1<0,
+    R is H+R1.

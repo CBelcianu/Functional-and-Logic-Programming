@@ -1,0 +1,7 @@
+%predicate to determine if a list has valley aspect
+
+valley([_,_],1).
+valley([H1|[H2|[H3|T]]],V):-H1>H2,H2<H3,V=:=0,!,
+    valley([H2|[H3|T]],1).
+valley([H1,H2,H3|T],V):-((H1>H2,H2>H3);(H1<H2,H2<H3)),
+    valley([H2,H3|T],V).

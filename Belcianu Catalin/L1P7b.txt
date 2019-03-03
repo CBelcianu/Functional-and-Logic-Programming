@@ -1,0 +1,7 @@
+%predicate to create a list [m,..,n] with all int. from the interval [m,n]
+
+res(M,M,R):-R=[M].
+res(M,N,R):-M<N,
+    M1 is M+1,
+    res(M1,N,R1),
+    R=[M|R1].

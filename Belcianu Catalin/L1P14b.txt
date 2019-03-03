@@ -1,0 +1,8 @@
+%predicate to select the n-th element of a given list
+
+res([],_,_,_).
+res([H|_],N,N,R):-
+    R is H.
+res([_|T],P,N,R):-P<N,
+    P1 is P+1,
+    res(T,P1,N,R).

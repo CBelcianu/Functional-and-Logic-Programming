@@ -1,0 +1,39 @@
+%b)
+%deletes the first occurence of the min element in a list
+%sterge_min(l-list, R-result)
+%sterge_min(i,o)
+sterge_min([],[]):-!.
+sterge_min(List,Rez):-minlist(List,N),deletesmth(N,List,Rez).
+
+
+%find minimum from a list
+%minlist(L-list, R-result)
+%minlist(i,o)
+
+minlist([Min],Min).             
+minlist([H,K|T],M) :- H =< K,                          
+    minlist([H|T],M).           
+minlist([H,K|T],M) :- H > K,                             
+    minlist([K|T],M).
+
+%delete first occurence of an element
+%deletesmth(E-element,L1-list,L2-list)
+%deletesmth(i,i,o)
+
+deletesmth(E,[],[]).
+deletesmth(E,[E|T],T).
+deletesmth(E,[H|T],[H|T1]) :-
+    deletesmth(E,T,T1).
+
+---------------------------------------------
+%a)
+%determine if a list has an even number of elements without counting them
+%evenlength(L-List)
+%evenlength(i)
+%evenlength(l1,l2,..,ln) - true, if L=[]
+%						 - false, if L=[el]
+%			   		     - evenlength(l3,..,ln)
+
+evenlength([]).
+evenlength([_,_|T]) :-
+   evenlength(T).

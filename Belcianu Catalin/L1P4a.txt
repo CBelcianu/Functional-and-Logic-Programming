@@ -1,0 +1,16 @@
+%predicate to determine the difference of two sets
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+res([],_,R):- R=[].
+res([H|T],L,R):-nro(L,H,R1),R1>=1,
+    res(T,L,R2),
+    R=R2.
+res([H|T],L,R):-nro(L,H,R1),R1<1,
+    res(T,L,R2),
+    R=[H|R2].

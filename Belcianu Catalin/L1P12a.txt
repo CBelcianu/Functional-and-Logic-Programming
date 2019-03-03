@@ -1,0 +1,9 @@
+% predicate to substitute in a list a value with all the elements of another list
+
+res([],_,_,[]).
+res([H|T],E,L,R):-H=:=E,
+    res(T,E,L,R1),
+    R=[L|R1].
+res([H|T],E,L,R):-H=\=E,
+    res(T,E,L,R1),
+    R=[H|R1].

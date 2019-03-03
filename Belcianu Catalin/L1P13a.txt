@@ -1,0 +1,17 @@
+%transform a list in a set
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+res([],[]).
+res([H|[]],R):-R=[H].
+res([H|T],R):-nro(T,H,R1),R1>=1,
+    res(T,R2),
+    R=R2.
+res([H|T],R):-nro(T,H,R1),R1<1,
+    res(T,R2),
+    R=[H|R2].

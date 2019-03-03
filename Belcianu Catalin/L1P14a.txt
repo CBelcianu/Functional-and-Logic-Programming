@@ -1,0 +1,19 @@
+%predicate to test if two sets are equak without difference
+
+isin(X,[X|_]).
+isin(X,[_|T]):-isin(X,T).
+
+len([],0).
+len([_|T],R):-
+    len(T,R1),
+    R is R1+1.
+
+deleteall([],_,[]).
+deleteall([H|T],X,R):-H=X, 
+    deleteall(T,X,R).
+deleteall([H|T],X,[H|R]):-deleteall(T,X,R).
+
+res([],[]).
+res([H|T],L):-isin(H,L),
+    deleteall(L,H,L1),
+    res(T,L1).

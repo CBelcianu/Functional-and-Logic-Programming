@@ -1,0 +1,38 @@
+%Sort a list with removing the double values
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+del([],_,[]).
+del([H|T],X,R):-H=X, 
+    R=T.
+del([H|T],X,[H|R]):-del(T,X,R).
+
+minlist([Min],Min).             
+minlist([H,K|T],M) :- H =< K,                          
+    minlist([H|T],M).           
+minlist([H,K|T],M) :- H > K,                             
+    minlist([K|T],M).
+
+%function that eliminates the duplicates
+res([],[]).
+res([H|T],R):-nro(T,H,R1),R1>=1,
+    del(T,H,R2),
+    res(R2,R3),
+    R=[H|R3].
+res([H|T],R):-nro(T,H,R1),R1<1,
+    res(T,R2),
+    R=[H|R2].
+
+%function that sorts
+srt([E],[E]).
+srt(L,R):-minlist(L,X),
+    del(L,X,L1),
+    srt(L1,R1),
+    R=[X|R1].
+
+sortt(L,R):-res(L,L1),srt(L1,R).

@@ -1,0 +1,11 @@
+%predicate to create the sublist (lm, …, ln) from the list (l1,…, lk)
+
+res([],_,_,_,[]).
+res([H|_],_,N,N,R):-R=[H].
+res([H|T],M,N,P,R):-P>=M,P<N,
+    P1 is P+1,
+    res(T,M,N,P1,R1),
+    R=[H|R1].
+res([H|T],M,N,P,R):-
+    P1 is P+1,
+    res(T,M,N,P1,R).

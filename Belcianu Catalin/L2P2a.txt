@@ -1,0 +1,18 @@
+%predicate that sorts with keeping the duplicates
+
+del([],_,[]).
+del([H|T],X,R):-H=X, 
+    R=T.
+del([H|T],X,[H|R]):-del(T,X,R).
+
+minlist([Min],Min).             
+minlist([H,K|T],M) :- H =< K,                          
+    minlist([H|T],M).           
+minlist([H,K|T],M) :- H > K,                             
+    minlist([K|T],M).
+
+srt([E],[E]).
+srt(L,R):-minlist(L,X),
+    del(L,X,L1),
+    srt(L1,R1),
+    R=[X|R1].

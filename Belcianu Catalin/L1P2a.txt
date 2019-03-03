@@ -1,0 +1,10 @@
+%predicate to remove all the occurences of an atom
+
+
+rem([],_,[]).
+rem([H|T],X,R):-X=H,
+    rem(T,X,R1),
+    R=R1.
+rem([H|T],X,R):-
+    rem(T,X,R1),
+    R=[H|R1].

@@ -1,0 +1,6 @@
+inv(0,P,P).
+inv(X,P,R):-X>0,
+    C is X mod 10,
+    X1 is X div 10,
+    P1 is C + P*10,
+    inv(X1,P1,R).

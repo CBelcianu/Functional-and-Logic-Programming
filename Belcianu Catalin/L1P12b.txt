@@ -1,0 +1,9 @@
+% predicate to remove the n-th element of a list
+
+rem([],_,_,[]).
+rem([_|T],P,N,R):-P=:=N,
+    R=T.
+rem([H|T],P,N,R):-P<N,
+    P1 is P+1,
+    rem(T,P1,N,R1),
+    R=[H|R1].

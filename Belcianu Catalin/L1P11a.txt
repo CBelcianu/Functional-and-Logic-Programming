@@ -1,0 +1,9 @@
+%predicate to substitute an el. from a list with another
+
+sub([],_,_,[]).
+sub([H|T],E,X,R):-H=:=E,
+    sub(T,E,X,R1),
+    R=[X|R1].
+sub([H|T],E,X,R):-H=\=E,
+    sub(T,E,X,R1),
+    R=[H|R1].

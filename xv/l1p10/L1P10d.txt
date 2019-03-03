@@ -1,0 +1,24 @@
+(DEFUN remo(l e)
+	(cond
+	((null l) nil)
+	((eq (car l) e) (remo (cdr l) e))
+	(T (cons (car l) (remo (cdr l) e)))
+	)
+)
+
+(defun counn(l e)
+	(cond
+	((null l) 0)
+	((eq (car l) e) (+ 1 (counn (cdr l) e)))
+	(T (counn (cdr l) e))
+	)
+)
+
+(defun lista(l v)
+	(cond
+		((null l) nil)
+		((< v 0) (lista  l (car l)))
+		((eq v (car l)) (cons (cons (car l) (counn l (car l))) 
+                 (lista (remo l (car l)) (cadr l))))
+	)
+)

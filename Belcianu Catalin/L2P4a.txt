@@ -1,0 +1,21 @@
+%P2P4a
+
+sumaLista([],[],C,Rez):-C>0,Rez=[C],!.
+sumaLista([],[],_,[]):-!.
+sumaLista([H|T],[],C,Rez):-!,S is H+C,C1 is S div 10,R is S mod 10,sumaLista(T,[],C1,Rez1),Rez=[R|Rez1].
+sumaLista([],[H|T],C,Rez):-!,S is H+C,C1 is S div 10,R is S mod 10,sumaLista([],T,C1,Rez1),Rez=[R|Rez1].
+sumaLista([H|T],[H1|T1],C,Rez):-S is H1+H+C,C1 is S div 10,R is S mod 10,sumaLista(T,T1,C1,Rez1),Rez=[R|Rez1].
+
+sumaL(L,L1,Rez):-invers(L,LF),invers(L1,LF1),sumaLista(LF,LF1,0,Rez1),invers(Rez1,Rez).
+
+invers([],[]):-!.
+invers([H|T],Rez):-invers(T,Rez1),adaugaF(Rez1,H,Rez).
+
+adaugaF([],E,[E]):-!.
+adaugaF([H|T],E,Rez):-adaugaF(T,E,Rez1),Rez=[H|Rez1].
+
+%P2P4b
+
+sumaF([],[]):-!.
+sumaF([H|T],Rez):-is_list(H),!,sumaF(T,Rez1),sumaL(H,Rez1,Rez).
+sumaF([_|T],Rez):-sumaF(T,Rez).

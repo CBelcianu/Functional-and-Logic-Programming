@@ -1,0 +1,45 @@
+%a)
+%determines the maximum in a list
+%maxlist(L-list, R-result)
+%maxlist(i,o)
+%maxlist(l1..ln,min)= 0,n=0
+%					  l2,l1<l2
+%					  l1,l1>l2
+maxlist([Min],Min).             
+maxlist([H,K|T],M) :- H > K,                          
+    maxlist([H|T],M).           
+maxlist([H,K|T],M) :- H =< K,                             
+    maxlist([K|T],M).
+
+%determies the positions of the maximum in a list
+%maxpos(L-list,L1-list,R-list,P-integer)
+%maxpos(i,i,0,i)
+maxpos([],L,[],P).
+maxpos([],[],[],P).
+maxpos([H],L,R,P):-maxlist(L,R1), H=:=R1,
+    P1 is P+1,
+    R=[P1].
+maxpos([H],L,R,P):-maxlist(L,R1), H=\=R1,
+    P1 is P+1,
+    maxpos([],L,R,P1).
+maxpos([H|T],L,R,P):-maxlist(L,R1), H=:=R1,
+    P1 is P+1,
+    maxpos(T,L,RL,P1),
+    R=[P1|RL].
+maxpos([H|T],L,R,P):-maxlist(L,R1), H=\=R1,
+    P1 is P+1,
+    maxpos(T,L,R,P1).
+-----------------------------------------
+%b)
+%replaces the sublists of a list with the list of the positions of the max in that subist
+%replace(L-list,R-list)
+%replace(i,o)
+replace([],[]).
+replace([H|T],R):-is_list(H),
+    maxpos(H,H,R1,0),
+    replace(T,R2),
+    R=[R1|R2].
+replace([H|T],R):-
+    replace(T,R1),
+    R=[H|R1].
+    

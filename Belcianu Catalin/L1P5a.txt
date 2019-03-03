@@ -1,0 +1,12 @@
+%predicate to compute the union of two sets
+
+isin(X,[X|_]).
+isin(X,[_|T]):-isin(X,T).
+
+res([H|T],X,R):-
+    isin(H,X),
+    res(T,X,R).
+res([H|T],X,[H|R]):-
+    \+ isin(H,X),
+    res(T,X,R).
+res([],X,X).

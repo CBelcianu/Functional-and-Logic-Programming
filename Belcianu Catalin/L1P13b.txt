@@ -1,0 +1,19 @@
+%predicate to determine the cmmdc of the elems. from a list
+
+cmmdc(A,B,R):-A=:=B,
+    R is A.
+cmmdc(A,B,R):-A=:=0,
+    R is B.
+cmmdc(A,B,R):-A<B,
+    B1 is B-A,
+    cmmdc(A,B1,R).
+cmmdc(A,B,R):-A>B,
+    cmmdc(B,A,R).
+
+cmmdclist([],_,_).
+cmmdclist([H|[]],X,R):-
+    cmmdc(H,X,R1),
+    R is R1.
+cmmdclist([H|T],X,R):-
+    cmmdc(H,X,R1),
+    cmmdclist(T,R1,R).

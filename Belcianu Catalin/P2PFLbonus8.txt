@@ -1,0 +1,27 @@
+%a)
+cv(CF,[E],R):-E<9,
+    CF is 0,
+    E1 is E+1,
+    R=[E1].
+cv(CF,[E],R):-E>8,
+    CF is 1,
+    R=[0].
+cv(CF,[H|T],R):-H<9,
+    cv(CF1,T,R1),
+    H1 is H+CF1,
+    CF is 0,
+    R=[H1|R1].
+cv(CF,[H|T],R):-H>8,
+    cv(CF1,T,R1),
+    H1 is 0,
+    CF is 1,
+    R=[H1|R1].
+---------------------------
+
+%b)
+cvv([],[]).
+cvv([H|T],R):-is_list(H),
+    cv(CF,H,REZ),
+    cvv(T,R1),
+    R=[REZ|R1].
+cvv([H|T],R):-cvv(T,R1),R=[H|R1].

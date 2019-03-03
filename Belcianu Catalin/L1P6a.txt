@@ -1,0 +1,10 @@
+%predicate to verify is a list is a set
+
+notin(_,[]).
+notin(A,[H|T]):-A\=H,
+    notin(A,T).
+
+nodups([]).
+nodups([_]).
+nodups([H|T]):-notin(H,T),
+    nodups(T).

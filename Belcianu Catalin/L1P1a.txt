@@ -1,0 +1,22 @@
+%lowest common multiple in a list
+
+cmmdc(A,B,R):-A=:=B,
+    R is A.
+cmmdc(A,B,R):-A=:=0,
+    R is B.
+cmmdc(A,B,R):-A<B,
+    B1 is B-A,
+    cmmdc(A,B1,R).
+cmmdc(A,B,R):-A>B,
+    cmmdc(B,A,R).
+
+cmmmc(A,B,R):-cmmdc(A,B,R1),
+    R is A*B/R1.
+
+cmmmclist([],_,_).
+cmmmclist([H|[]],X,R):-
+    cmmmc(X,H,R1),
+    R is R1.
+cmmmclist([H|T],X,R):-
+    cmmmc(X,H,R1),
+    cmmmclist(T,R1,R).

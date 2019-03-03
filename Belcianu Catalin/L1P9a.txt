@@ -1,0 +1,11 @@
+%predicate to insert an el. on a given pos. in  a list
+
+res([],E,_,1,[E]).
+res([],_,_,P,R):-P>1,
+    R=[].
+res([H|T],E,C,P,R):-P=\=C,
+    C1 is C+1,
+    res(T,E,C1,P,R1),
+    R=[H|R1].
+res([H|T],E,C,P,R):-P=:=C,
+    R=[E,H|T].

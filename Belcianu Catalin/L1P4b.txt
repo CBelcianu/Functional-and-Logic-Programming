@@ -1,0 +1,10 @@
+%add the value 1 after every enven elem in a list
+
+add([],_).
+add([X],R):-R=[X].
+add([H|T],R):-Rz is H mod 2, Rz=:=0,
+    add(T,R1),
+	R=[H,1|R1].
+add([H|T],R):-
+    add(T,R1),
+     R= [H|R1].

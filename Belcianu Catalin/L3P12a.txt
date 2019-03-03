@@ -1,0 +1,20 @@
+%add after every el. of a list, the list of its divisors
+
+dvs(E,E,[1]).
+dvs(E,D,R):-R1 is E mod D, R1=:=0,
+    D1 is D+1,
+    dvs(E,D1,RE),
+    R=[D|RE].
+dvs(E,D,R):-R1 is E mod D, R1=\=0,
+    D1 is D+1,
+    dvs(E,D1,RE),
+    R=RE.
+
+res([],[]).
+res([E],R):-
+    dvs(E,2,D),
+    R=[E|[D]].
+res([H|T],R):-
+    res(T,R1),
+    dvs(H,2,D),
+    R=[H,D|R1].

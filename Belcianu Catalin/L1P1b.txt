@@ -1,0 +1,17 @@
+%predicate to add a value after 1-st, 2-nd, 4-th etc.
+
+putere(2).
+putere(X):- X>2,
+    X1 is X/2,
+    putere(X1).
+
+add([],_,_,_).
+add([X],V,P,R):-R=[X].
+add([H|T],V,P,R):-putere(P),
+    P1 is P+2,
+    add(T,V,P1,R1),
+	R=[V,H|R1].
+add([H|T],V,P,R):-
+    P1 is P+1,
+    add(T,V,P1,R1),
+     R= [H|R1].

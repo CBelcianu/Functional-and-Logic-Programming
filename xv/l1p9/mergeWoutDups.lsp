@@ -1,0 +1,10 @@
+(defun mrg(lst1 lst2)
+	(cond
+		((and (null lst1) (null lst2)) nil)
+		((null lst1) lst2)
+		((null lst2) lst1)
+		((< (car lst1) (car lst2)) (cons (car lst1) (mrg (cdr lst1) lst2)))
+		((> (car lst1) (car lst2)) (cons (car lst2) (mrg lst1 (cdr lst2))))
+		((= (car lst1) (car lst2)) (mrg (cdr lst1) lst2))
+	)
+)

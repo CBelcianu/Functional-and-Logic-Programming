@@ -1,0 +1,17 @@
+%remove all occurences of the max from a list
+
+max([X],X).
+max([H1,H2|T],R):-H1>=H2,
+    max([H1|T],R).
+max([H1,H2|T],R):-H1<H2,
+    max([H2|T],R).
+
+deleteall([],_,[]).
+deleteall([H|T],X,R):-H=X, 
+    deleteall(T,X,R).
+deleteall([H|T],X,[H|R]):-deleteall(T,X,R).
+
+res(L,R):-
+    max(L,R1),
+    deleteall(L,R1,R2),
+    R=R2.

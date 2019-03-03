@@ -1,0 +1,21 @@
+%predicate to determine the number of occurences of all elements in a list
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+deleteall([],_,[]).
+deleteall([H|T],X,R):-H=X, 
+    deleteall(T,X,R).
+deleteall([H|T],X,[H|R]):-deleteall(T,X,R).
+
+res([],[]).
+res([H|T],R):-
+    nro([H|T],H,R1),
+    R2 is H,
+    deleteall([H|T],H,R3),
+    res(R3,R4),
+    R=[[R2,R1]|R4].

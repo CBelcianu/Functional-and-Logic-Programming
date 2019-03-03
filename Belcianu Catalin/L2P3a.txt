@@ -1,0 +1,43 @@
+%merge two sorted lists
+
+del([],_,[]).
+del([H|T],X,R):-H=X, 
+    R=T.
+del([H|T],X,[H|R]):-del(T,X,R).
+
+minlist([Min],Min).             
+minlist([H,K|T],M) :- H =< K,                          
+    minlist([H|T],M).           
+minlist([H,K|T],M) :- H > K,                             
+    minlist([K|T],M).
+
+nro([],_,C):-C=0.
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([_|T],E,C):-
+    nro(T,E,C).
+
+res([],[]).
+res([H|T],R):-nro(T,H,R1),R1>=1,
+    del(T,H,R2),
+    res(R2,R3),
+    R=[H|R3].
+res([H|T],R):-nro(T,H,R1),R1<1,
+    res(T,R2),
+    R=[H|R2].
+
+merge([],[],[]).
+merge([],L,L).
+merge(L,[],L).
+merge(L1,L2,R):-minlist(L1,M1),minlist(L2,M2),M1=<M2,
+    del(L1,M1,L11),
+    merge(L11,L2,R1),
+    R=[M1|R1].
+merge(L1,L2,R):-minlist(L1,M1),minlist(L2,M2),M1>M2,
+    del(L2,M2,L22),
+    merge(L1,L22,R1),
+    R=[M2|R1].
+
+merg(L1,L2,R):-merge(L1,L2,R1),
+    res(R1,R).

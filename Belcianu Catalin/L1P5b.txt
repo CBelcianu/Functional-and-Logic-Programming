@@ -1,0 +1,12 @@
+%predicate to determine all the possible pairs in a list
+
+pairs(A, B):-pairs_1(A, B-[]).
+
+pairs_1([], B-B).
+pairs_1([X|A], B-C):-
+	pairs_2(A, X, B-D),
+	pairs_1(A, D-C).
+
+pairs_2([], _, E-E).
+pairs_2([X|A], Y, [[Y,X]|E]-C):-
+	pairs_2(A, Y, E-C).

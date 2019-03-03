@@ -1,0 +1,16 @@
+%P1P6a
+
+
+nro([],_,0).
+nro([H|T],E,C):-H=:=E,
+    nro(T,E,C1),
+    C is C1+1.
+nro([H|T],E,C):-H=\=E,
+    nro(T,E,C).
+
+elimdups([],[]).
+elimdups([H|T],R):-nro([H|T],H,C),C>1,
+    elimdups(T,R).
+elimdups([H|T],R):-
+    elimdups(T,R1),
+    R=[H|R1].
